@@ -10,7 +10,7 @@ TOKEN = '8443611271:AAHQiXYvsOGI5FuoEB-Q0QTgdKleskhS1QQ'
 # ВНИМАНИЕ: Проверь эту ссылку! 
 # Если кнопка из BotFather работает, скопируй ссылку оттуда и вставь сюда.
 # Скорее всего, правильная ссылка выглядит так: https://dandrusenko2005-ops.github.io/
-APP_URL = 'https://dandrusenko2005-ops.github.io/' 
+APP_URL = 't.me/Fireliqbot/FireLiQshop' 
 
 CHANNEL_URL = 'https://t.me/liquidjesus'
 
