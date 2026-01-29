@@ -9,7 +9,7 @@ import time
 # Твой токен
 TOKEN = '8443611271:AAHQiXYvsOGI5FuoEB-Q0QTgdKleskhS1QQ'
 # Ссылка, которая РАБОТАЕТ в BotFather (скопируй её в точности!)
-APP_URL = 'https://t.me/Fireliqbot/FireLiQshop'
+APP_URL = 'https://dandrusenko2005-ops.github.io/FireLiQ/'
 # Твой канал
 CHANNEL_URL = 'https://t.me/liquidjesus'
 
