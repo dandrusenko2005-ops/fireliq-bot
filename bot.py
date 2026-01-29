@@ -6,7 +6,7 @@ import os
 
 # --- КОНФИГУРАЦИЯ ---
 TOKEN = '8443611271:AAHQiXYvsOGI5FuoEB-Q0QTgdKleskhS1QQ'
-APP_URL = 'https://dandrusenko2005-ops.github.io/shop/'
+APP_URL = 'https://t.me/Fireliqbot/FireLiQshop'
 CHANNEL_URL = 'https://t.me/liquidjesus'
 
 bot = telebot.TeleBot(TOKEN)
