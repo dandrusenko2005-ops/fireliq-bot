@@ -5,63 +5,53 @@ import threading
 import os
 import time
 
-# --- НАСТРОЙКИ ---
-# Твой токен
+# --- КОНФИГУРАЦИЯ ---
 TOKEN = '8443611271:AAHQiXYvsOGI5FuoEB-Q0QTgdKleskhS1QQ'
-# Ссылка, которая РАБОТАЕТ в BotFather (скопируй её в точности!)
-APP_URL = 'https://dandrusenko2005-ops.github.io/FireLiQ/'
-# Твой канал
+APP_URL = 'https://dandrusenko2005-ops.github.io/shop/'
 CHANNEL_URL = 'https://t.me/liquidjesus'
 
-bot = telebot.TeleBot(TOKEN)
+# Инициализируем бота с увеличенным таймаутом
+bot = telebot.TeleBot(TOKEN, threaded=True, num_threads=4)
 app = Flask(__name__)
 
-# Веб-сервер для "здоровья" Koyeb
+# Хелсчек для хостинга и пинга
 @app.route('/')
 def health():
-    return "OK", 200
+    return "⚡ FireLiQ Bot is Active and Fast", 200
 
 @bot.message_handler(commands=['start'])
 def start(message):
     try:
         markup = types.InlineKeyboardMarkup(row_width=1)
         
-        # Кнопка WebApp
+        # WebApp кнопка
         web_app = types.WebAppInfo(APP_URL.strip())
-        btn_shop = types.InlineKeyboardButton("ОТКРЫТЬ МАГАЗИН 🔥", web_app=web_app)
-        
-        # Кнопка канала
-        btn_channel = types.InlineKeyboardButton("НАШ КАНАЛ 📢", url=CHANNEL_URL)
+        btn_shop = types.InlineKeyboardButton("ОТКРЫТЬ МАГАЗИН 🛍️", web_app=web_app)
+        btn_channel = types.InlineKeyboardButton("НАШ КАНАЛ 🔥", url=CHANNEL_URL)
         
         markup.add(btn_shop, btn_channel)
         
-        welcome_text = (
+        welcome = (
             f"Привет, {message.from_user.first_name}! 👋\n\n"
-            "Добро пожаловать в **FireLiQ Store**.\n"
-            "Теперь вы можете делать заказ с доставкой 24/7!"
+            "Добро пожаловать в наш магазин **FireLiQ🔥**\n"
+            "Заказывайте доставку через наш магазин 24/7"
         )
         
-        bot.send_message(message.chat.id, welcome_text, reply_markup=markup, parse_mode='Markdown')
+        bot.send_message(message.chat.id, welcome, reply_markup=markup, parse_mode='Markdown')
     except Exception as e:
-        print(f"Error in start command: {e}")
+        print(f"Start error: {e}")
 
 def run_bot():
-    while True:
-        try:
-            print("Бот запускается...")
-            bot.polling(none_stop=True, interval=0, timeout=20)
-        except Exception as e:
-            print(f"Ошибка бота: {e}")
-            time.sleep(5)  # Пауза перед перезапуском при сбое
+    print("Бот запущен в режиме Infinity Polling...")
+    # infinity_polling автоматически перезапускается при ошибках сети
+    bot.infinity_polling(timeout=10, long_polling_timeout=5)
 
 if __name__ == "__main__":
-    # Запускаем бота в фоне
-    bot_thread = threading.Thread(target=run_bot)
-    bot_thread.daemon = True
-    bot_thread.start()
+    # Запуск бота в фоновом потоке
+    threading.Thread(target=run_bot, daemon=True).start()
     
-    # Запускаем сервер на порту Koyeb
-    # ВАЖНО: Порт должен быть 8000
+    # Запуск Flask сервера (Koyeb будет его слушать)
     port = int(os.environ.get("PORT", 8000))
-    app.run(host='0.0.0.0', port=port)
+    # use_reloader=False важно при использовании потоков
+    app.run(host='0.0.0.0', port=port, debug=False, use_reloader=False)
 
