@@ -38,7 +38,7 @@ def start(message):
         welcome_text = (
             f"Привет, {message.from_user.first_name}! 👋\n\n"
             "Добро пожаловать в **FireLiQ Store**.\n"
-            "Магазин теперь работает стабильно 24/7!"
+            "Теперь вы можете делать заказ с доставкой 24/7!"
         )
         
         bot.send_message(message.chat.id, welcome_text, reply_markup=markup, parse_mode='Markdown')
