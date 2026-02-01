@@ -7,8 +7,8 @@ import time
 
 # --- КОНФИГУРАЦИЯ ---
 TOKEN = '8443611271:AAHQiXYvsOGI5FuoEB-Q0QTgdKleskhS1QQ'
-APP_URL = 'https://dandrusenko2005-ops.github.io/shop/'
-CHANNEL_URL = 'https://t.me/liquidjesus'
+APP_URL = "https://dandrusenko2005-ops.github.io/FireLiQ/"
+CHANNEL_URL = "https://t.me/liquidjesus"
 
 bot = telebot.TeleBot(TOKEN, threaded=True, num_threads=4)
 app = Flask(__name__)
